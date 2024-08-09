@@ -13,7 +13,7 @@ import cv2
 
 @loader.tds
 class MusicSpeedChanger(loader.Module):
-    """v20240805.beta - Changes speed of music"""
+    """v20240809.beta - Changes speed of music"""
     prefix = '[Music Speed Changer]'
 
     strings = {
@@ -173,7 +173,7 @@ class MusicSpeedChanger(loader.Module):
                 if filetype == 'audio':
                     new_title = f'{title} (nightcore)'
                     outputfile = f'{performer or title}-{random_string}-(nightcore).mp3'
-                    os.system(f'ffmpeg -i "{filename}" -vf "setpts=PTS/{speed}" -af "aresample=44100,asetrate=44100*{speed}" -c:a libmp3lame -b:a 192k "{outputfile}')
+                    os.system(f'ffmpeg -i "{filename}" -af "aresample=44100,asetrate=44100*{speed}" -b:a 320k -metadata artist="{new_performer}" -metadata title="{new_title}" "{outputfile}"')
                 elif filetype == 'video':
                     new_title = f'{title} (nightcore)'
                     outputfile = f'video-{random_string}-(nightcore).mp4'
@@ -182,7 +182,7 @@ class MusicSpeedChanger(loader.Module):
                 if filetype == 'audio':
                     new_title = f'{title} (daycore)'
                     outputfile = f'{performer or title}-{random_string}-(daycore).mp3'
-                    os.system(f'ffmpeg -i "{filename}" -vf "setpts=PTS/{speed}" -af "aresample=44100,asetrate=44100*{speed}" -c:a libmp3lame -b:a 192k "{outputfile}"')
+                    os.system(f'ffmpeg -i "{filename}" -af "aresample=44100,asetrate=44100*{speed}" -b:a 320k -metadata artist="{new_performer}" -metadata title="{new_title}" "{outputfile}"')
                 elif filetype == 'video':
                     new_title = f'{title} (daycore)'
                     outputfile = f'video-{random_string}-(daycore).mp4'
